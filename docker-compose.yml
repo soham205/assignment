@@ -1,0 +1,50 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:latest
+    ports:
+      - "5672:5672" # RabbitMQ port
+      - "15672:15672" # RabbitMQ management plugin port
+    environment:
+      - RABBITMQ_DEFAULT_USER=root
+      - RABBITMQ_DEFAULT_PASS=123
+
+  pg_db:
+    image: postgres:alpine3.17
+    volumes:
+      - ./.docker/postgres_data:/var/lib/postgresql/data
+    env_file:
+      - .env
+    healthcheck:
+      test: [ "CMD-SHELL", "psql -U root assignment" ]
+      interval: 5s
+      timeout: 5s
+      retries: 2
+
+  user-service:
+    build:
+      context: ./userService
+      dockerfile: ./Dockerfile
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    volumes:
+      - './userService:/app'
+    depends_on:
+      pg_db:
+        condition: service_healthy
+
+  course-service:
+    build:
+      context: ./courseService
+      dockerfile: ./Dockerfile
+    ports:
+      - 4000:4000
+    env_file:
+      - .env
+    volumes:
+      - './courseService:/app'
+    depends_on:
+      pg_db:
+        condition: service_healthy
