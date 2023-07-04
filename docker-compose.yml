@@ -35,16 +35,30 @@ services:
       pg_db:
         condition: service_healthy
 
-  # course-service:
-  #   build:
-  #     context: ./courseService
-  #     dockerfile: ./Dockerfile
-  #   ports:
-  #     - 4000:4000
-  #   env_file:
-  #     - .env
-  #   volumes:
-  #     - './courseService:/app'
-  #   depends_on:
-  #     pg_db:
-  #       condition: service_healthy
+  course-service:
+    build:
+      context: ./courseService
+      dockerfile: ./Dockerfile
+    ports:
+      - 4000:4000
+    env_file:
+      - .env
+    volumes:
+      - './courseService:/app'
+    depends_on:
+      pg_db:
+        condition: service_healthy
+
+  grades-service:
+    build:
+      context: ./gradesService
+      dockerfile: ./Dockerfile
+    ports:
+      - 5000:5000
+    env_file:
+      - .env
+    volumes:
+      - './gradesService:/app'
+    depends_on:
+      pg_db:
+        condition: service_healthy
