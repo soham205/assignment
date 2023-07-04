@@ -29,8 +29,6 @@ export default class UsersServices {
 			const raw = condition.raw ? condition.raw : false;
 			delete condition.raw;
 			const otpRequired = excludeOtp ? '' : 'otp';
-			console.log('------------------------------------------------sdjklfa;sdklfja;sldkfja;lsdjkfa;l');
-
 			/*------------------------------------------------------------------------------------------------------------- */
 			const createdData = await UsersModel.findOne({
 				where: JSON.parse(JSON.stringify(condition)),
@@ -84,24 +82,15 @@ export default class UsersServices {
 
 	public static async findAll(condition: any) {
 		try {
-			const offset: number = condition.offset >= 0 ? Number(condition.offset) : 0;
-			const record: number = condition.record > 0 ? Number(condition.record) : 100;
-			const order: Array<string> = condition.order ? condition.order : [['createdAt', 'DESC']];
-			delete condition.offset;
-			console.log('------------------------------------------------sdjklfa;sdklfja;sldkfja;lsdjkfa;l');
-			delete condition.record;
 
-			// const findData = await UsersModel.findAndCountAll({
-			// 	// where: JSON.parse(JSON.stringify(condition)),
-			// 	limit: record,
-			// 	offset: offset * record,
-			// 	order: order,
-			// 	raw: true
-			// });
+			const findData = await UsersModel.findAndCountAll({
+				where: JSON.parse(JSON.stringify(condition)),
+				raw: true
+			});
 			return {
 				status: 200,
 				success: true,
-				data: '',
+				data: findData,
 				message: ''
 			};
 		} catch (error: unknown) {
