@@ -18,30 +18,8 @@ module.exports = {
         type: Sequelize.STRING(700),
         allowNull: true,
       },
-      user_name: {
+      password: {
         type: Sequelize.STRING(700),
-        allowNull: true,
-      },
-      wallet_address: {
-        type: Sequelize.STRING(700),
-        allowNull: false,
-        unique: true
-      },
-      avtar_url: {
-        type: Sequelize.STRING(700),
-        allowNull: true,
-      },
-      avtar_url_key: {
-        type: Sequelize.STRING(700),
-        allowNull: true,
-      },
-      nonce: {
-        type: Sequelize.STRING(300),
-        allowNull: false,
-      },
-      is_confirmed: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
         allowNull: false,
       },
       createdAt: {

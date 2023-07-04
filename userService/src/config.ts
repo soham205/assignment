@@ -24,3 +24,6 @@ export const ENVIRONMENTS = {
 };
 
 export const RUNNING_ENVIRONMENT = process.env.NODE_ENV || '';
+
+export const JWTSecret = process.env.JWTSecret || '';
+export const JWT_LOGIN_EXPIRES_IN = process.env.JWT_LOGIN_EXPIRES_IN || '';

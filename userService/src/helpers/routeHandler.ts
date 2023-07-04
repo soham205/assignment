@@ -21,6 +21,8 @@ const addRoute = (router: Router, methodType: REQ_METHOD_TYPE_E, routePath: stri
 			break;
 
 		case REQ_METHOD_TYPE_E.POST:
+			console.log('routePath', routePath);
+
 			router.post(routePath, asyncHandler(executionFn));
 			break;
 

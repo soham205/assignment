@@ -17,6 +17,10 @@ COPY ./.sequelizerc /app/build
 COPY ./package.json /app/build
 
 COPY ./.env /app/build
+
+
+# COPY ./node_modules /app/build
+
  
 EXPOSE 3000
 
